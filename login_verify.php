@@ -3,6 +3,13 @@ session_start();
 require_once("conn.php");
 
 if (isset($_POST) && !empty($_POST)) {
+    if($_POST["_csrf"] === $_SESSION["csrf"]) {
+        var_dump("Codice corretto");
+    } else {
+        $_SESSION = [];
+        header("Location: login.php");
+        exit;
+    }
     $dirty_email = $_POST["email"];
     $dirty_email = filter_var($dirty_email, FILTER_SANITIZE_EMAIL);
     $email = filter_var($dirty_email, FILTER_VALIDATE_EMAIL);

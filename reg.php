@@ -7,6 +7,7 @@ if(!empty($_POST)) {
         var_dump("Codice corretto");
     } else {
         $_SESSION = [];
+        $_SESSION["error-mex"] = "token non corretto";
         header("Location: register.php");
         exit;
     }
@@ -15,6 +16,7 @@ if(!empty($_POST)) {
         if(!$conn) {
             $_SESSION = [];
             header("Location: register.php");
+            exit;
         }
         $stmtGetAll = $conn->prepare("SELECT * FROM users");
         $stmtGetAll->execute();
@@ -29,19 +31,20 @@ if(!empty($_POST)) {
         }
         if($user_exist) {
             $_SESSION = [];
+            $_SESSION["error-mex"] = "Email non valida";
             header("Location: register.php");
             exit;
         } else {
 
             try {
-                $stmt = $conn->prepare("INSERT INTO users (email, password) VALUES (:email, :password)");
+                $stmt = $conn->prepare("INSERT INTO users (email, password, created_at) VALUES (:email, :password, :created)");
                 $stmt->bindParam("email", $_POST["email"], PDO::PARAM_STR);
                 $stmt->bindParam("password", password_hash($_POST["password"], PASSWORD_DEFAULT), PDO::PARAM_STR);
+                $stmt->bindParam("created", date("Y-m-d H:i:s", time()));
                 $stmt->execute();
                 $stmtGetAll->execute();
                 $result = $stmtGetAll->fetchAll(PDO::FETCH_ASSOC);
-                echo "Salvato";
-                var_dump($result);
+                $_SESSION["success-mex"] = "Registrazione effettuata correttamente";
             } catch (PDOException $ex) {
                 echo $ex->getMessage();
             }
@@ -54,4 +57,4 @@ if(!empty($_POST)) {
     }
 }
 
-var_dump("Ok");
+header("Location: register.php");

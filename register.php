@@ -9,7 +9,27 @@ $_SESSION["csrf"] = $csrf;
 require_once("html_up.php");
 ?>
 
-<div class="container w-50 pt-5">
+<?php if (isset($_SESSION["success-mex"])) { ?>
+    <div id="success" class="alert alert-success" role="alert">
+        <?php 
+            echo $_SESSION["success-mex"]; 
+            unset($_SESSION["success-mex"]);
+        ?>
+    </div>
+<?php } ?>
+
+<?php if (isset($_SESSION["error-mex"])) { ?>
+    <div id="error" class="alert alert-danger" role="alert">
+        <?php 
+            echo $_SESSION["error-mex"];
+            unset($_SESSION["error-mex"]);
+        ?>
+    </div>
+<?php } ?>
+
+<h1 class="text-center text-warning py-5">Register</h1>
+
+<div class="container w-50">
     <div class="row">
         <form class="bg-dark text-white p-5" action="reg.php" method="POST">
             <input type="hidden" name="_csrf" value="<?php echo $_SESSION["csrf"]; ?>">
@@ -26,6 +46,8 @@ require_once("html_up.php");
         </form>
     </div>
 </div>
+
+<script type="text/javascript" src="js/mex_handler/script.js"></script>
 
 <?php
 require_once("html_down.php");

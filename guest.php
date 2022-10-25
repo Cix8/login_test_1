@@ -11,5 +11,5 @@ require_once("html_up.php");
 <a href="register.php">Registrati</a>
 
 <?php
-    require_once("html_down.php");
+require_once("html_down.php");
 ?>
