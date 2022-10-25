@@ -18,18 +18,20 @@ if(!empty($_POST)) {
             header("Location: register.php");
             exit;
         }
-        $stmtGetAll = $conn->prepare("SELECT * FROM users");
+        $stmtGetAll = $conn->prepare("SELECT * FROM users WHERE email = :email");
+        $email = $_POST["email"];
+        $stmtGetAll->bindParam("email", $email);
         $stmtGetAll->execute();
         
         $result = $stmtGetAll->fetchAll(PDO::FETCH_ASSOC);
-        $user_exist = false;
-        foreach($result as $single_res) {
-            if($single_res["email"] === $_POST["email"]) {
-                $user_exist = true;
-                break;
-            }
-        }
-        if($user_exist) {
+        // $user_exist = false;
+        // foreach($result as $single_res) {
+        //     if($single_res["email"] === $_POST["email"]) {
+        //         $user_exist = true;
+        //         break;
+        //     }
+        // }
+        if(count($result) > 0) {
             $_SESSION = [];
             $_SESSION["error-mex"] = "Email non valida";
             header("Location: register.php");
@@ -44,7 +46,12 @@ if(!empty($_POST)) {
                 $stmt->execute();
                 $stmtGetAll->execute();
                 $result = $stmtGetAll->fetchAll(PDO::FETCH_ASSOC);
+                $user = $result[0];
+                $_SESSION = [];
+                $_SESSION["user"] = $user; 
                 $_SESSION["success-mex"] = "Registrazione effettuata correttamente";
+                header("Location: index.php");
+                exit;
             } catch (PDOException $ex) {
                 echo $ex->getMessage();
             }

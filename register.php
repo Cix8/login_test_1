@@ -9,15 +9,6 @@ $_SESSION["csrf"] = $csrf;
 require_once("html_up.php");
 ?>
 
-<?php if (isset($_SESSION["success-mex"])) { ?>
-    <div id="success" class="alert alert-success" role="alert">
-        <?php 
-            echo $_SESSION["success-mex"]; 
-            unset($_SESSION["success-mex"]);
-        ?>
-    </div>
-<?php } ?>
-
 <?php if (isset($_SESSION["error-mex"])) { ?>
     <div id="error" class="alert alert-danger" role="alert">
         <?php 
