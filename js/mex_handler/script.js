@@ -1,18 +1,19 @@
 const error = document.getElementById("error") ?? "";
 const success = document.getElementById("success") ?? "";
 
-if(error) {
-    error.style.cursor = "pointer";
-    error.addEventListener("click", function() {
-        error.classList.add("d-none");
-        error.innerHTML = "";
-    })
+if (error) {
+    let time = setTimeout(fade, 2000, error, 2);
 }
 
-if(success) {
-    success.style.cursor = "pointer";
-    success.addEventListener("click", function() {
-        success.classList.add("d-none");
-        success.innerHTML = "";
-    })
+if (success) {
+    let time = setTimeout(fade, 2000, success, 2);
+}
+
+function fade(el, tm) {
+    el.style.opacity = 0;
+    el.style.transition = "opacity " + tm + "s";
+    el.style.WebkitTransition = "opacity " + tm + "s";
+    let timer = setTimeout(function() {
+        el.style.display = "none";
+    }, 2100);
 }

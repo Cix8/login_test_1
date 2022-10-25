@@ -3,7 +3,7 @@ session_start();
 
 if(!isset($_SESSION["user"]) || $_SESSION["user"] === null) {
     $_SESSION = [];
-    header("Location: guest.php");
+    header("Location: login.php");
     exit;
 }
 

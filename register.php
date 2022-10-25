@@ -27,11 +27,15 @@ require_once("html_up.php");
     </div>
 <?php } ?>
 
+<div class="container-fluid p-3">
+    <a class="btn btn-primary" href="guest.php">Home</a>
+</div>
+
 <h1 class="text-center text-warning py-5">Register</h1>
 
 <div class="container w-50">
     <div class="row">
-        <form class="bg-dark text-white p-5" action="reg.php" method="POST">
+        <form class="bg-dark text-white p-5 ms_form" action="reg.php" method="POST">
             <input type="hidden" name="_csrf" value="<?php echo $_SESSION["csrf"]; ?>">
             <div class="mb-3">
                 <label for="email" class="form-label">Email address</label>
@@ -42,7 +46,9 @@ require_once("html_up.php");
                 <label for="password" class="form-label">Password</label>
                 <input type="password" class="form-control" id="password" name="password" placeholder="Inserisci una password">
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <div class="pt-3">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
         </form>
     </div>
 </div>

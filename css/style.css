@@ -17,3 +17,7 @@ body {
     border-radius: 20px;
     box-shadow: 3px 3px 30px greenyellow;
 }
+
+.ms_form {
+    border-radius: 30px;
+}
