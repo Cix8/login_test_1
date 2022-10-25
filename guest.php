@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once("html_up.php");
 ?>
 
@@ -8,9 +9,11 @@ require_once("html_up.php");
             <h1>Sei fuori</h1>
         </div>
         <div>
-            <a class="btn btn-primary me-2" href="login.php">Effettua il login</a>
-            <a class="btn btn-success" href="index.php">Entra</a>
-            <a class="btn btn-primary ms-2" href="register.php">Registrati</a>
+            <?php if(!isset($_SESSION["user"]) || empty($_SESSION["user"])) { ?>
+                <a class="btn btn-primary me-2" href="login.php">Effettua il login</a>
+                <a class="btn btn-primary" href="register.php">Registrati</a>
+            <?php } ?>
+            <a class="btn btn-success ms-2" href="index.php">Entra</a>
         </div>
     </div>
 </div>

@@ -3,6 +3,11 @@ session_start();
 require_once("conn.php");
 
 if (isset($_POST) && !empty($_POST)) {
+    if(!empty($_POST["action"]) && $_POST["action"] == "logout") {
+        $_SESSION = [];
+        header("Location: guest.php");
+        exit;
+    }
     if($_POST["_csrf"] === $_SESSION["csrf"]) {
         var_dump("Codice corretto");
     } else {
