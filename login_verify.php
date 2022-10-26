@@ -4,6 +4,7 @@ require_once("conn.php");
 
 if (isset($_POST) && !empty($_POST)) {
     if(!empty($_POST["action"]) && $_POST["action"] == "logout") {
+        session_regenerate_id();
         $_SESSION = [];
         header("Location: guest.php");
         exit;
