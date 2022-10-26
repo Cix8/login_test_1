@@ -33,6 +33,7 @@ if (isset($_POST) && !empty($_POST)) {
     }
 
     if (password_verify($_POST["password"], $user["password"])) {
+        session_regenerate_id();
         unset($user["password"]);
         $_SESSION["user"] = $user;
         header("Location: index.php");

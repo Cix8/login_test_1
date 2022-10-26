@@ -47,6 +47,7 @@ if(!empty($_POST)) {
                 $stmtGetAll->execute();
                 $result = $stmtGetAll->fetchAll(PDO::FETCH_ASSOC);
                 $user = $result[0];
+                session_regenerate_id();
                 $_SESSION = [];
                 $_SESSION["user"] = $user; 
                 $_SESSION["success-mex"] = "Registrazione effettuata correttamente";
